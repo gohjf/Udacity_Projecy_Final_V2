@@ -16,6 +16,7 @@ export function formatQuestion(question, author, authedUser) {
   const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length;
   const optionOneVotesPercentage = Math.round((question.optionOne.votes.length / totalVotes) * 100);
   const optionTwoVotesPercentage = Math.round((question.optionTwo.votes.length / totalVotes) * 100);
+  const isOptionOneSelected = question.optionOne.votes.includes(authedUser);
 
   return {
     id,
@@ -32,7 +33,9 @@ export function formatQuestion(question, author, authedUser) {
     optionOneVotesPercentage: optionOneVotesPercentage,
     optionTwoVotesPercentage: optionTwoVotesPercentage,
     isUserAuthor: author === authedUser ? true : false,
-    totalVotes: totalVotes,
     exist : true,
+    optionOneVotes : question.optionOne.votes.length,
+    optionTwoVotes : question.optionTwo.votes.length,
+    selectedChoice : isOptionOneSelected,
   }
 }
