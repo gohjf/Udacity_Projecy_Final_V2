@@ -22,8 +22,8 @@ const Dashboard = (props) => {
 
     return <div className='Dashboard-Container'>
         <div className="tab">
-            <button class="tablinks" onClick={(event) => openTab(event, "NewQuestions")} >New Questions</button>
-            <button class="tablinks" onClick={(event) => openTab(event, "Done")} >Done</button>
+            <button className="tablinks" onClick={(event) => openTab(event, "NewQuestions")} >New Questions</button>
+            <button className="tablinks" onClick={(event) => openTab(event, "Done")} >Done</button>
         </div>
 
         <div id="NewQuestions" className="tabcontent">
@@ -31,6 +31,7 @@ const Dashboard = (props) => {
             <ul className="dashboard-list">
                 {props.newQuestions.map((question) => (
                     <Questions
+                        key={question.id}
                         id={question.id}
                         question={question}
                         user={question.author}
@@ -39,11 +40,12 @@ const Dashboard = (props) => {
             </ul>
         </div>
 
-        <div id="Done" class="tabcontent" style={{display: 'none'}}>
+        <div id="Done" className="tabcontent" style={{display: 'none'}}>
             <h3 className="center ">Done</h3>
             <ul className="dashboard-list">
                 {props.doneQuestions.map((question) => (
                     <Questions
+                        key={question.id}
                         id={question.id}
                         question={question}
                         user={question.author}

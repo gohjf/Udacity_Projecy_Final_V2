@@ -17,7 +17,7 @@ const withRouter = (Component) => {
 
 
 const Poll = ({ dispatch, authedUser, users, id, question }) => {
-  const toNavigate = useNavigate();
+  //const toNavigate = useNavigate();
 
   if (!question.exist){
     return <Navigate to={"*"}  replace={true} />
@@ -31,14 +31,12 @@ const Poll = ({ dispatch, authedUser, users, id, question }) => {
     optionTwoText,
     optionOneVotesPercentage,
     optionTwoVotesPercentage,
-    totalVotes,
+    optionOneVotes,
+    optionTwoVotes,
+    selectedChoice
   } = question;
 
-  console.log("Percentage for Option 1 : " + optionOneVotesPercentage);
-  console.log("Percentage for Option 2 : " + optionTwoVotesPercentage);
-  console.log("Total Votes: " + totalVotes);
-  console.log(authedUser);
-
+  console.log(selectedChoice);
 
   const onChangeOne = (event) => {
     event.preventDefault();
@@ -47,7 +45,7 @@ const Poll = ({ dispatch, authedUser, users, id, question }) => {
       qid : id,
       answer: "optionOne",
     }))
-    toNavigate('/');
+    //toNavigate('/');
   }
   const onChangeTwo = (event) => {
     event.preventDefault();
@@ -56,7 +54,7 @@ const Poll = ({ dispatch, authedUser, users, id, question }) => {
       id,
       answer: 'optionTwo',
     }))
-    toNavigate('/');
+    //toNavigate('/');
   }
 
   return (
@@ -81,14 +79,14 @@ const Poll = ({ dispatch, authedUser, users, id, question }) => {
         </div>
 
       ) : (
-        <div>Thank you for answering this question.
+        <div>Thank you for answering this question. You have selected {selectedChoice ? "Option One" : "Option Two"}
           <div className="Poll_Choice_One">
             {optionOneText}
-            <button disabled>{optionOneVotesPercentage}%</button>
+            <button className={selectedChoice ? "selected" : ""} disabled>{optionOneVotesPercentage}% - {optionOneVotes} votes</button>
           </div>
-          <div className="Poll_Choice_Two">
+          <div id='Poll_Choice_Two' className="Poll_Choice_Two">
             {optionTwoText}
-            <button disabled>{optionTwoVotesPercentage}%</button>
+            <button className={!selectedChoice ? "selected" : ""} disabled>{optionTwoVotesPercentage}% - {optionTwoVotes} votes</button>
           </div>
         </div>
       )}
