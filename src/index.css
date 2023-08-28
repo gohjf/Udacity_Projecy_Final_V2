@@ -174,3 +174,7 @@ li {
 li.right{
   float: right;
 }
+
+.selected {
+  background-color: #4CAF50; /* Green */
+}
